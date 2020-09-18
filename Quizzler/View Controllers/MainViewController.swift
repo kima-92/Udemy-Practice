@@ -8,20 +8,33 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var trueButton: UIButton!
+    @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
+    // MARK: - DidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateViews()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Action
+    
+    @IBAction func answerButtonPressed(_ sender: UIButton) {
     }
-    */
-
+    
+    // MARK: - Methods
+    
+    private func updateViews() {
+        trueButton.layer.borderColor = UIColor(red: 76/255, green: 100/255, blue: 146/255, alpha: 1).cgColor
+        falseButton.layer.borderColor = UIColor(red: 76/255, green: 100/255, blue: 146/255, alpha: 1).cgColor
+        trueButton.layer.borderWidth = 5
+        falseButton.layer.borderWidth = 5
+        trueButton.layer.cornerRadius = 15
+        falseButton.layer.cornerRadius = 15
+    }
 }

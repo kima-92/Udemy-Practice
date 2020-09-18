@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,18 +14,74 @@
                     <view key="view" contentMode="scaleToFill" id="Ycz-eu-ASq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiU-Ic-hwf">
+                                <rect key="frame" x="20" y="144" width="374" height="534"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZSm-Pd-9d1">
+                                <rect key="frame" x="20" y="698" width="374" height="140"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01r-8w-V48">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="am9-uA-m6C"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="True">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="answerButtonPressed:" destination="xeD-qh-lyl" eventType="touchUpInside" id="9a2-HF-dVV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUm-zX-eqA">
+                                        <rect key="frame" x="0.0" y="80" width="374" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="99g-fD-erF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="False">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="answerButtonPressed:" destination="xeD-qh-lyl" eventType="touchUpInside" id="Wkg-TL-Sy0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wc1-rG-tTF">
+                                <rect key="frame" x="10" y="848" width="394" height="4"/>
+                                <color key="tintColor" red="0.91728705170000002" green="0.51617783309999998" blue="0.70258671049999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="XWu-Kp-MRu"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20486351850000001" green="0.23044335839999999" blue="0.36313918229999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XWu-Kp-MRu" firstAttribute="bottom" secondItem="wc1-rG-tTF" secondAttribute="bottom" constant="10" id="GBj-XH-jze"/>
+                            <constraint firstItem="XWu-Kp-MRu" firstAttribute="trailing" secondItem="wc1-rG-tTF" secondAttribute="trailing" constant="10" id="Gds-fF-iuO"/>
+                            <constraint firstItem="XWu-Kp-MRu" firstAttribute="trailing" secondItem="ZSm-Pd-9d1" secondAttribute="trailing" constant="20" id="KyQ-xp-Wnb"/>
+                            <constraint firstItem="ZSm-Pd-9d1" firstAttribute="top" secondItem="PiU-Ic-hwf" secondAttribute="bottom" constant="20" id="QI8-Wo-c3r"/>
+                            <constraint firstItem="wc1-rG-tTF" firstAttribute="top" secondItem="ZSm-Pd-9d1" secondAttribute="bottom" constant="10" id="Umf-py-iVn"/>
+                            <constraint firstItem="wc1-rG-tTF" firstAttribute="leading" secondItem="XWu-Kp-MRu" secondAttribute="leading" constant="10" id="aRi-Sk-ydb"/>
+                            <constraint firstItem="XWu-Kp-MRu" firstAttribute="trailing" secondItem="PiU-Ic-hwf" secondAttribute="trailing" constant="20" id="awD-94-7A6"/>
+                            <constraint firstItem="PiU-Ic-hwf" firstAttribute="leading" secondItem="XWu-Kp-MRu" secondAttribute="leading" constant="20" id="he2-DO-R5i"/>
+                            <constraint firstItem="ZSm-Pd-9d1" firstAttribute="leading" secondItem="XWu-Kp-MRu" secondAttribute="leading" constant="20" id="jIa-Gd-YOS"/>
+                            <constraint firstItem="PiU-Ic-hwf" firstAttribute="top" secondItem="XWu-Kp-MRu" secondAttribute="top" constant="100" id="yGp-cC-A6C"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="falseButton" destination="xUm-zX-eqA" id="AS1-iE-NBu"/>
+                        <outlet property="progressBar" destination="wc1-rG-tTF" id="7gp-cZ-Bbm"/>
+                        <outlet property="questionLabel" destination="PiU-Ic-hwf" id="y7u-eB-SJe"/>
+                        <outlet property="trueButton" destination="01r-8w-V48" id="Sxk-O1-wAI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3di-Rj-Hf1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-78" y="103"/>
+            <point key="canvasLocation" x="-78.260869565217391" y="102.45535714285714"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
