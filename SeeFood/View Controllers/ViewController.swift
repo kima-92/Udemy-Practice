@@ -65,11 +65,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Model failed to process image")
             }
             if let firstResult = results.first {
-                if firstResult.identifier.contains("hotdog") {
-                    self.navigationItem.title = "Hotdog!"
-                } else {
-                    self.navigationItem.title = "Not Hogdog!"
-                }
+                self.navigationItem.title = firstResult.identifier
+                
+//                if firstResult.identifier.contains("hotdog") {
+//                    self.navigationItem.title = "Hotdog!"
+//                } else {
+//                    self.navigationItem.title = "Not Hogdog!"
+//                }
+//                    print(results) // if you want to the confidence property and all the other classifications
             }
         }
         let handler = VNImageRequestHandler(ciImage: image)
