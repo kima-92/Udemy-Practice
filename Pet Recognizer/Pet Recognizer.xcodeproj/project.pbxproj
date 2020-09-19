@@ -40,6 +40,8 @@
 		FA010BDD251687AC0026E881 = {
 			isa = PBXGroup;
 			children = (
+				FA010BFE251687BD0026E881 /* Storyboards */,
+				FA010BFF251687CF0026E881 /* View Controllers */,
 				FA010BE8251687AC0026E881 /* Pet Recognizer */,
 				FA010BE7251687AC0026E881 /* Products */,
 			);
@@ -58,13 +60,27 @@
 			children = (
 				FA010BE9251687AC0026E881 /* AppDelegate.swift */,
 				FA010BEB251687AC0026E881 /* SceneDelegate.swift */,
-				FA010BED251687AC0026E881 /* ViewController.swift */,
-				FA010BEF251687AC0026E881 /* Main.storyboard */,
 				FA010BF2251687AF0026E881 /* Assets.xcassets */,
-				FA010BF4251687AF0026E881 /* LaunchScreen.storyboard */,
 				FA010BF7251687AF0026E881 /* Info.plist */,
 			);
 			path = "Pet Recognizer";
+			sourceTree = "<group>";
+		};
+		FA010BFE251687BD0026E881 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FA010BEF251687AC0026E881 /* Main.storyboard */,
+				FA010BF4251687AF0026E881 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FA010BFF251687CF0026E881 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA010BED251687AC0026E881 /* ViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
