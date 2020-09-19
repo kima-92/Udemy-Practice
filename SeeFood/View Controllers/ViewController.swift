@@ -6,14 +6,24 @@
 //
 
 import UIKit
+import CoreML
+import Vision
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // MARK: - Properties
+    let imagePicker = UIImagePickerController()
+    
+    // MARK: - Outlets
+    @IBOutlet weak var imageView: UIImageView!
+    
+    // MARK: - DidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
+    
+    // MARK: - Action
+    @IBAction func cameraBarButtonTapped(_ sender: UIBarButtonItem) {
+    }
 }
 
