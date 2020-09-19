@@ -29,6 +29,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: - Actions
     
     @IBAction func cameraBarButtonTapped(_ sender: UIBarButtonItem) {
+        present(imagePicker, animated: true)
     }
     
     // MARK: - Methods
@@ -71,7 +72,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Model failed to process image")
             }
             if let firstResult = results.first {
-                self.navigationItem.title = firstResult.identifier
+                
+                if firstResult.confidence > 0.70 {
+                    self.navigationItem.title = firstResult.identifier
+                } else {
+                    self.navigationItem.title = "I can't tell what this is.."
+                }
                 
                 //print(results) // if you want to the confidence property and all the other classifications
             }
