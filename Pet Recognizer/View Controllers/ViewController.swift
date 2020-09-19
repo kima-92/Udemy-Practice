@@ -11,18 +11,24 @@ import Vision
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let imagePicker = UIImagePickerController()
-
+    var didFinishLoading = false
+    
     @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - DidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImagePicker()
+        didFinishLoading = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        present(imagePicker, animated: true)
-        // ^^ for some reazon I cant present it inside viewDidLoad
+        tryDisplayCamera()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func cameraBarButtonTapped(_ sender: UIBarButtonItem) {
     }
     
     // MARK: - Methods
@@ -35,10 +41,56 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        guard let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        guard let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         
-        imageView.image = userPickedImage
+        // Setup the ImageView to display what you recieve from the Picker
+        imageView.image = pickedImage
         imagePicker.dismiss(animated: true, completion: nil)
+        
+        guard let ciImage = CIImage(image: pickedImage) else {
+            NSLog("Failed to convert pickedImage into a CIImage")
+            return
+        }
+        detect(image: ciImage)
+    }
+    
+    func detect(image: CIImage) {
+        
+        // Try to create a model
+        guard let model = try? VNCoreMLModel(for: PetRecognizer().model) else {
+            fatalError("Failed loading CoreML Model")
+        }
+        
+        // Create a Request
+        // which will return an array of classifications of the given image
+        let request = VNCoreMLRequest(model: model) { (request, error) in
+            
+            // Request an array of classifications of
+            // An array of ClassificationObservations AFTER the image has been processed
+            guard let results = request.results as? [VNClassificationObservation] else {
+                fatalError("Model failed to process image")
+            }
+            if let firstResult = results.first {
+                self.navigationItem.title = firstResult.identifier
+                
+                //print(results) // if you want to the confidence property and all the other classifications
+            }
+        }
+        let handler = VNImageRequestHandler(ciImage: image)
+        
+        // Try to perform the request with this handler
+        do {
+            try handler.perform([request])
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func tryDisplayCamera() {
+        if didFinishLoading == true {
+            present(imagePicker, animated: true)
+            didFinishLoading = false
+        }
     }
 }
 

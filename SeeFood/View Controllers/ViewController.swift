@@ -38,6 +38,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Getting the image from the camera
         guard let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         
+        // Setup the ImageView to display what you recieve from the Picker
         imageView.image = userPickedImage
         imagePicker.dismiss(animated: true, completion: nil)
         

@@ -13,6 +13,7 @@
 		FA010BF1251687AC0026E881 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA010BEF251687AC0026E881 /* Main.storyboard */; };
 		FA010BF3251687AF0026E881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA010BF2251687AF0026E881 /* Assets.xcassets */; };
 		FA010BF6251687AF0026E881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA010BF4251687AF0026E881 /* LaunchScreen.storyboard */; };
+		FA5575352516929100964BD8 /* PetRecognizer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = FA5575342516929100964BD8 /* PetRecognizer.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		FA010BF2251687AF0026E881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA010BF5251687AF0026E881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA010BF7251687AF0026E881 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA5575342516929100964BD8 /* PetRecognizer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = PetRecognizer.mlmodel; path = ../../PetRecognizerCoreML/PetRecognizer.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				FA010BEB251687AC0026E881 /* SceneDelegate.swift */,
 				FA010BF2251687AF0026E881 /* Assets.xcassets */,
 				FA010BF7251687AF0026E881 /* Info.plist */,
+				FA5575342516929100964BD8 /* PetRecognizer.mlmodel */,
 			);
 			path = "Pet Recognizer";
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			files = (
 				FA010BEE251687AC0026E881 /* ViewController.swift in Sources */,
 				FA010BEA251687AC0026E881 /* AppDelegate.swift in Sources */,
+				FA5575352516929100964BD8 /* PetRecognizer.mlmodel in Sources */,
 				FA010BEC251687AC0026E881 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
