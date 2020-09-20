@@ -21,33 +21,51 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // MARK: - Creating the Dice
         
-        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+        let sphere = SCNSphere(radius: 0.2)
         
         let material = SCNMaterial()
         
-        material.diffuse.contents = UIColor.red
-        cube.materials = [material]
+        material.diffuse.contents = UIImage(named: "art.scnassets/moon.jpg")
+        sphere.materials = [material]
         
         // MARK: - Create a Node
         
         let node = SCNNode()
         
         node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
-        node.geometry = cube
-        
-        /*
-         1.   The node by itself does nothing, but you can give it a point in space (position), and an object (geometry) to hold at that point in space
-         
-         2.   x -> Horizontal
-         y -> Vertical   (in this case we put is slightly elevated using 0.1)
-         z -> away (-) and towards (+) you   (in this case we put it slighly away from us
-         */
+        node.geometry = sphere
         
         // Add it to the sceneView to display at runtime
         sceneView.scene.rootNode.addChildNode(node)
         sceneView.autoenablesDefaultLighting = true
-        
-        
+//
+//        // MARK: - Creating the Dice
+//
+//        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+//
+//        let material = SCNMaterial()
+//
+//        material.diffuse.contents = UIColor.red
+//        cube.materials = [material]
+//
+//        // MARK: - Create a Node
+//
+//        let node = SCNNode()
+//
+//        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
+//        node.geometry = cube
+//
+//        /*
+//         1.   The node by itself does nothing, but you can give it a point in space (position), and an object (geometry) to hold at that point in space
+//
+//         2.   x -> Horizontal
+//         y -> Vertical   (in this case we put is slightly elevated using 0.1)
+//         z -> away (-) and towards (+) you   (in this case we put it slighly away from us
+//         */
+//
+//        // Add it to the sceneView to display at runtime
+//        sceneView.scene.rootNode.addChildNode(node)
+//        sceneView.autoenablesDefaultLighting = true
         
         //        // Create a new scene
         //        let scene = SCNScene(named: "art.scnassets/ship.scn")!
