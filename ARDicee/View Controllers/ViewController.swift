@@ -43,7 +43,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
          z -> away (-) and towards (+) you   (in this case we put it slighly away from us
          */
         
+        // Add it to the sceneView to display at runtime
         sceneView.scene.rootNode.addChildNode(node)
+        sceneView.autoenablesDefaultLighting = true
         
         
         
