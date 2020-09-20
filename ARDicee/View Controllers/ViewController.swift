@@ -13,79 +13,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
     
+    // MARK: - DidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the view's delegate
         sceneView.delegate = self
         
-        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
-        
-        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
-            
-            diceNode.position = SCNVector3(0, 0, -0.1)
-            sceneView.scene.rootNode.addChildNode(diceNode)
-        }
-        
-        
-        
-        
-        
-        sceneView.autoenablesDefaultLighting = true
-        
-        // MARK: - Creating the Dice
-        
-//        let sphere = SCNSphere(radius: 0.2)
-//
-//        let material = SCNMaterial()
-//
-//        material.diffuse.contents = UIImage(named: "art.scnassets/moon.jpg")
-//        sphere.materials = [material]
-//
-//        // MARK: - Create a Node
-//
-//        let node = SCNNode()
-//
-//        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
-//        node.geometry = sphere
-//
-//        // Add it to the sceneView to display at runtime
-//        sceneView.scene.rootNode.addChildNode(node)
-//        sceneView.autoenablesDefaultLighting = true
-//
-//        // MARK: - Creating the Dice
-//
-//        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
-//
-//        let material = SCNMaterial()
-//
-//        material.diffuse.contents = UIColor.red
-//        cube.materials = [material]
-//
-//        // MARK: - Create a Node
-//
-//        let node = SCNNode()
-//
-//        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
-//        node.geometry = cube
-//
-//        /*
-//         1.   The node by itself does nothing, but you can give it a point in space (position), and an object (geometry) to hold at that point in space
-//
-//         2.   x -> Horizontal
-//         y -> Vertical   (in this case we put is slightly elevated using 0.1)
-//         z -> away (-) and towards (+) you   (in this case we put it slighly away from us
-//         */
-//
-//        // Add it to the sceneView to display at runtime
-//        sceneView.scene.rootNode.addChildNode(node)
-//        sceneView.autoenablesDefaultLighting = true
-        
-        //        // Create a new scene
-        //        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        //
-        //        // Set the scene to the view
-        //        sceneView.scene = scene
+        //displayApplesPlane()
+        //displayCube()
+        //displayMoon()
+        displayDice()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,4 +44,88 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
+    // MARK: - Methods
+    
+    // Apple's free code
+    func displayApplesPlane() {
+        // Create a new scene
+        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        
+        // Set the scene to the view
+        sceneView.scene = scene
+    }
+    
+    func displayCube() {
+        // Creating a simple red Cube
+        
+        // Cube dimentions
+        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+        
+        // Material
+        let material = SCNMaterial()
+        
+        material.diffuse.contents = UIColor.red
+        cube.materials = [material]
+        
+        // Node
+        let node = SCNNode()
+        
+        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
+        node.geometry = cube
+        
+        /*
+         
+         1.   The node by itself does nothing, but you can give it a point in space (position), and an object (geometry) to hold at that point in space
+         
+         2.   x -> Horizontal
+         y -> Vertical   (in this case we put is slightly elevated using 0.1)
+         z -> away (-) and towards (+) you   (in this case we put it slighly away from us
+         
+         */
+        
+        // Add it to the sceneView to display at runtime
+        sceneView.scene.rootNode.addChildNode(node)
+        
+        // Adding lighting to look more 3D
+        sceneView.autoenablesDefaultLighting = true
+    }
+    
+    func displayMoon() {
+        
+        // Moon Dimentions
+        let sphere = SCNSphere(radius: 0.2)
+        
+        // Moon material
+        let material = SCNMaterial()
+        
+        material.diffuse.contents = UIImage(named: "art.scnassets/moon.jpg")
+        sphere.materials = [material]
+        
+        // Node
+        let node = SCNNode()
+        
+        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
+        node.geometry = sphere
+        
+        // Add it to the sceneView to display at runtime
+        sceneView.scene.rootNode.addChildNode(node)
+        // Give it some light
+        sceneView.autoenablesDefaultLighting = true
+    }
+    
+    func displayDice() {
+        
+        // Dice's Dimentions
+        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
+        
+        // If we can get the rootNode of the diceScene that has the ID "Dice"
+        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+            
+            // Add the position, and put this diceNode in the sceneView
+            diceNode.position = SCNVector3(0, 0, -0.1)
+            sceneView.scene.rootNode.addChildNode(diceNode)
+        }
+        // Add light
+        sceneView.autoenablesDefaultLighting = true
+    }
 }
