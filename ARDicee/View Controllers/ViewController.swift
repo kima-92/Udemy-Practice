@@ -21,10 +21,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
+        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        
         //displayApplesPlane()
         //displayCube()
         //displayMoon()
-        displayDice()
+        //displayDice()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +34,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
+        
+        // Enable plane detection -> horizontally
+        configuration.planeDetection = .horizontal
         
         // Run the view's session
         sceneView.session.run(configuration)
@@ -42,6 +47,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+    
+    // When the app detects a horizontal plane, it will call this method
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        // This method gives us an ARAnchor,
+        // which is a real-world position and orientation that can be used to place objects in a AR scene.
+        // - It contain coordinates
+        // - There's a LOT of ARAnchor types, so in this case we need the ARPlaneSnchor one
+        
+        if anchor is ARPlaneAnchor {
+            print("plane detected")
+        } else {
+            return
+        }
     }
     
     // MARK: - Methods
