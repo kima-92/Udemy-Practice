@@ -19,25 +19,39 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
+        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
+        
+        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+            
+            diceNode.position = SCNVector3(0, 0, -0.1)
+            sceneView.scene.rootNode.addChildNode(diceNode)
+        }
+        
+        
+        
+        
+        
+        sceneView.autoenablesDefaultLighting = true
+        
         // MARK: - Creating the Dice
         
-        let sphere = SCNSphere(radius: 0.2)
-        
-        let material = SCNMaterial()
-        
-        material.diffuse.contents = UIImage(named: "art.scnassets/moon.jpg")
-        sphere.materials = [material]
-        
-        // MARK: - Create a Node
-        
-        let node = SCNNode()
-        
-        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
-        node.geometry = sphere
-        
-        // Add it to the sceneView to display at runtime
-        sceneView.scene.rootNode.addChildNode(node)
-        sceneView.autoenablesDefaultLighting = true
+//        let sphere = SCNSphere(radius: 0.2)
+//
+//        let material = SCNMaterial()
+//
+//        material.diffuse.contents = UIImage(named: "art.scnassets/moon.jpg")
+//        sphere.materials = [material]
+//
+//        // MARK: - Create a Node
+//
+//        let node = SCNNode()
+//
+//        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
+//        node.geometry = sphere
+//
+//        // Add it to the sceneView to display at runtime
+//        sceneView.scene.rootNode.addChildNode(node)
+//        sceneView.autoenablesDefaultLighting = true
 //
 //        // MARK: - Creating the Dice
 //
