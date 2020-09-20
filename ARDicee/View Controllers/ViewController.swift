@@ -49,6 +49,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
+    // MARK: - Methods from ARSCNViewDelegate
+    
     // When the app detects a horizontal plane, it will call this method
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // This method gives us an ARAnchor,
@@ -57,7 +59,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // - There's a LOT of ARAnchor types, so in this case we need the ARPlaneSnchor one
         
         if anchor is ARPlaneAnchor {
-            print("plane detected")
+            displayPlane(anchor: anchor as! ARPlaneAnchor, node: node)
+
         } else {
             return
         }
@@ -74,6 +77,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene = scene
     }
     
+    // Cube
     func displayCube() {
         // Creating a simple red Cube
         
@@ -109,6 +113,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.autoenablesDefaultLighting = true
     }
     
+    // Moon
     func displayMoon() {
         
         // Moon Dimentions
@@ -132,6 +137,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.autoenablesDefaultLighting = true
     }
     
+    // Dice
     func displayDice() {
         
         // Dice's Dimentions
@@ -146,5 +152,42 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         // Add light
         sceneView.autoenablesDefaultLighting = true
+    }
+    
+    // Plane object for Plane Detected
+    func displayPlane(anchor: ARPlaneAnchor, node: SCNNode) {
+        let planeAnchor = anchor
+        
+        // Dimentions
+        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
+        // ^^ VERY Implortant that you notice that x in this case contains BOTH width AND hight
+        // So use x and z, NOT x and y -> for the plane
+        
+        // Node
+        let planeNode = SCNNode()
+        
+        planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
+        // ^^ y will ALWAYS be 0 cause we don't want to place it above or below the plane detected
+        
+        planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
+        /*  ^^^
+         
+         - Checkout her video for more details (#395) but basically,
+         the plane created comes standing up, intead of flat down
+         so we need to "transform" it (rotate it) by 90 degrees
+         - Here we use pi to get the 90 degrees,
+         and use negative so it rotates clockwise
+         
+         */
+        
+        // Material
+        
+        let gridMaterial = SCNMaterial()
+        
+        gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
+        plane.materials = [gridMaterial]
+        planeNode.geometry = plane
+        
+        node.addChildNode(planeNode)
     }
 }
