@@ -50,6 +50,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     // MARK: - Methods from ARSCNViewDelegate
+
+    // Gives you the real-world location of where the user tapped on the screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if let touch = touches.first {
+            let touchLocation = touch.location(in: sceneView)
+            
+            // Checking if the user tapped on the detected plane
+            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+            
+            if !results.isEmpty {
+                print("Touches the plane")
+            }
+        }
+    }
     
     // When the app detects a horizontal plane, it will call this method
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
