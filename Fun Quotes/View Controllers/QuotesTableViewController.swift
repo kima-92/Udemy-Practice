@@ -8,6 +8,8 @@
 import UIKit
 
 class QuotesTableViewController: UITableViewController {
+    
+    // MARK: - Properties
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +20,12 @@ class QuotesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    // MARK: - Actions
+    
+    @IBAction func restoreButtonTapped(_ sender: UIBarButtonItem) {
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
