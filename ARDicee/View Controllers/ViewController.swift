@@ -50,19 +50,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     // MARK: - Methods from ARSCNViewDelegate
-
+    
     // Gives you the real-world location of where the user tapped on the screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        // Get the 2D position of where the user tapped on the camera
         if let touch = touches.first {
             let touchLocation = touch.location(in: sceneView)
             
-            // Checking if the user tapped on the detected plane
+            // Use the hitTest to convert the 2D space into a 3D space,
+            // and to check if the user tapped on the detected plane
             let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
             
-            if !results.isEmpty {
-                print("Touches the plane")
-            }
+            //testTouch(results: results)
+            
+            positionDiceOnLocationWith(results: results)
         }
     }
     
@@ -75,7 +77,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         if anchor is ARPlaneAnchor {
             displayPlane(anchor: anchor as! ARPlaneAnchor, node: node)
-
+            
         } else {
             return
         }
@@ -204,5 +206,50 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         planeNode.geometry = plane
         
         node.addChildNode(planeNode)
+    }
+    
+    private func testTouch(results: [ARHitTestResult]) {
+        
+        if !results.isEmpty {
+            // If the tap gesture touch (hit) one of our planes (.existingPlanesUsingExtent)
+            // meaning, if the result is empty
+            // print(Touched plane
+            print("Touches the plane")
+        } else {
+            print("Touched somewhere else")
+        }
+    }
+    
+    private func positionDiceOnLocationWith(results: [ARHitTestResult]) {
+        
+        if let hitResult = results.first {
+            // Create a new Scene
+            let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
+            
+            // Creating the DiceNode using the diceScene's node called Dice
+            if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+                
+                // give the Node a position
+                // the real-world position we got from where the user tapped
+                diceNode.position = SCNVector3(
+                    x: hitResult.worldTransform.columns.3.x,
+                    y: hitResult.worldTransform.columns.3.y,
+                    z: hitResult.worldTransform.columns.3.z)
+                
+                /*      ^^^^^^^^^^^
+                 HitResult is an array, and one of those objects is a worldTransform, which has a x,y and z position.
+                 
+                 The worldTransform is actually a 4x4 matrix of floats:
+                 Colum      - scale
+                 colum      - rotation
+                 colum      - ??
+                 colum #4   - position
+                 
+                 We need the 4th colum to get the position, which it's at index 3 in the array. From that colum you get the x, y and z positions.
+                 */
+                
+                sceneView.scene.rootNode.addChildNode(diceNode)
+            }
+        }
     }
 }
