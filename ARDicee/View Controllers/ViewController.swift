@@ -233,7 +233,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 // the real-world position we got from where the user tapped
                 diceNode.position = SCNVector3(
                     x: hitResult.worldTransform.columns.3.x,
-                    y: hitResult.worldTransform.columns.3.y,
+                    y: hitResult.worldTransform.columns.3.y + (diceNode.boundingSphere.radius * 2),
                     z: hitResult.worldTransform.columns.3.z)
                 
                 /*      ^^^^^^^^^^^
@@ -246,8 +246,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                  colum #4   - position
                  
                  We need the 4th colum to get the position, which it's at index 3 in the array. From that colum you get the x, y and z positions.
+                 
+                 Also, by using only the z position of the location we are using the exact middle of the plane in the z position. By adding the Dice's radious (which is about half it's size) we can bump the Dice up to it looks like it on top if the plane.
+                 In my case I also multiplied the radious by 2 cause using only the radious like Angela, my Dice still liked like it was in the middle of the plane
                  */
                 
+                // Add node to the Scene
                 sceneView.scene.rootNode.addChildNode(diceNode)
             }
         }
