@@ -253,7 +253,29 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 
                 // Add node to the Scene
                 sceneView.scene.rootNode.addChildNode(diceNode)
+                // Rotate dice
+                rotateDiceWithAnimation(diceNode: diceNode)
             }
         }
+    }
+    
+    private func rotateDiceWithAnimation(diceNode: SCNNode) {
+        // Turning the dice to a random side from 1-4, by 90°
+        let ninetyDegrees = Float.pi / 2
+        let randomX = Float(arc4random_uniform(4) + 1) * ninetyDegrees
+        
+        let randomZ = Float(arc4random_uniform(4) + 1) * ninetyDegrees
+        
+        // Changing Y would not change the number of the dice
+        
+        // Run animation
+        diceNode.runAction(
+            SCNAction.rotateBy(
+            x: CGFloat(randomX),
+            y: 0,           // won't change
+            z: CGFloat(randomZ),
+            duration: 0.5
+            )
+        )
     }
 }
