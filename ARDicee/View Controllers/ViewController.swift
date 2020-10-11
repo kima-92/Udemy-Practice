@@ -11,6 +11,9 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     
+    // MARK: - Properties
+    var diceArray = [SCNNode]()
+    
     @IBOutlet var sceneView: ARSCNView!
     
     // MARK: - DidLoad
@@ -251,10 +254,22 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                  In my case I also multiplied the radious by 2 cause using only the radious like Angela, my Dice still liked like it was in the middle of the plane
                  */
                 
+                diceArray.append(diceNode)
+                
                 // Add node to the Scene
                 sceneView.scene.rootNode.addChildNode(diceNode)
+                
                 // Rotate dice
                 rotateDiceWithAnimation(diceNode: diceNode)
+            }
+        }
+    }
+    
+    private func rollAll() {
+        
+        if !diceArray.isEmpty {
+            for dice in diceArray {
+                rotateDiceWithAnimation(diceNode: dice)
             }
         }
     }
