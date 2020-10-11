@@ -94,6 +94,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        rollAll()
+    }
+    
     // MARK: - Methods
     
     // Apple's free code
@@ -301,4 +305,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             )
         )
     }
+    
+    
 }
