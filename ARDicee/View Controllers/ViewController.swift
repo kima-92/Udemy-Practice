@@ -14,6 +14,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - Properties
     var diceArray = [SCNNode]()
     
+    // MARK: - Outlets
+    
     @IBOutlet var sceneView: ARSCNView!
     
     // MARK: - DidLoad
@@ -50,6 +52,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func rollAgainBarButtonTapped(_ sender: UIBarButtonItem) {
+        rollAll()
     }
     
     // MARK: - Methods from ARSCNViewDelegate
