@@ -60,6 +60,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         rollAll()
     }
     
+    @IBAction func removeAllBarButtonTapped(_ sender: UIBarButtonItem) {
+        if !diceArray.isEmpty {
+            for dice in diceArray {
+                dice.removeFromParentNode()
+            }
+        }
+    }
+    
     // MARK: - Methods from ARSCNViewDelegate
     
     // Gives you the real-world location of where the user tapped on the screen
@@ -305,6 +313,4 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             )
         )
     }
-    
-    
 }
