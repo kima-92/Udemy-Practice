@@ -18,6 +18,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the view's delegate
         sceneView.delegate = self
+        
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        /*
+         We'll be using the automatically detected feature points to figure out which parts of the scene are a continues surface. And be able to mesure something on that surface
+         */
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +43,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     // MARK: - ARSCNViewDelegate
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if let touchLocation = touches.first?.location(in: sceneView) {
+            let hitTestResult = sceneView.hitTest(touchLocation, types: .featurePoint)
+            
+            if let hitResult = hitTestResult.first {
+                addDot(at: hitResult)
+            }
+        }
+    }
+    
+    func addDot(at hitResult: ARHitTestResult) {
+        let dotGeometry
+    }
     
 /*
     // Override to create and configure nodes for anchors added to the view's session.
